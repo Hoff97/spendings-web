@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { AmexioWidgetModule, CommonHttpService } from 'amexio-ng-extensions';
 import { OverviewComponent } from './overview/overview.component';
 import { ConclusionComponent } from './conclusion/conclusion.component';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OverviewComponent,
-    ConclusionComponent
+    ConclusionComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
@@ -21,5 +23,4 @@ import { ConclusionComponent } from './conclusion/conclusion.component';
   providers: [CommonHttpService],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}
