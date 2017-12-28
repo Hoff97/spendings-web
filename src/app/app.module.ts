@@ -5,10 +5,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { AmexioWidgetModule, CommonHttpService } from 'amexio-ng-extensions';
+import { OverviewComponent } from './overview/overview.component';
+import { ConclusionComponent } from './conclusion/conclusion.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OverviewComponent,
+    ConclusionComponent
   ],
   imports: [
     BrowserModule,
