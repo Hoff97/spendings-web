@@ -8,7 +8,7 @@
     <div>
       <label>From</label>
       <mat-form-field>
-        <input matInput [matDatepicker]="pickerFrom" placeholder="Choose a date">
+        <input matInput [matDatepicker]="pickerFrom" placeholder="Choose a date" [formControl]="fromD">
         <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
         <mat-datepicker #pickerFrom></mat-datepicker>
       </mat-form-field>
@@ -16,7 +16,7 @@
     <div>
       <label>To</label>
       <mat-form-field>
-        <input matInput [matDatepicker]="pickerTo" placeholder="Choose a date">
+        <input matInput [matDatepicker]="pickerTo" placeholder="Choose a date" [formControl]="toD">
         <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
         <mat-datepicker #pickerTo></mat-datepicker>
       </mat-form-field>
@@ -24,7 +24,7 @@
     <div>
       <label>Filter</label>
       <mat-form-field>
-        <input matInput placeholder="Filter">
+        <input matInput placeholder="Filter" [formControl]="search">
       </mat-form-field>
     </div>
   </mat-expansion-panel>
