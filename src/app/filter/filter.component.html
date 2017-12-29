@@ -1,11 +1,31 @@
-<amexio-accordion>
-  <amexio-accordion-tab header="Filters" expanded="true">
-    <amexio-dropdown [placeholder]="'Choose'"
-      name="category"
-      [data]="categories"
-      [fieldLabel]="'Choose Category'"
-      [searchBox]="true"
-      [width]="'auto'">
-    </amexio-dropdown>
-  </amexio-accordion-tab>
-</amexio-accordion>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filter
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>
+      <label>From</label>
+      <mat-form-field>
+        <input matInput [matDatepicker]="pickerFrom" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFrom></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <label>To</label>
+      <mat-form-field>
+        <input matInput [matDatepicker]="pickerTo" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+        <mat-datepicker #pickerTo></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <label>Filter</label>
+      <mat-form-field>
+        <input matInput placeholder="Filter">
+      </mat-form-field>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

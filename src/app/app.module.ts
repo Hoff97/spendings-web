@@ -1,13 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
-import { AmexioWidgetModule, CommonHttpService } from 'amexio-ng-extensions';
 import { OverviewComponent } from './overview/overview.component';
 import { ConclusionComponent } from './conclusion/conclusion.component';
 import { FilterComponent } from './filter/filter.component';
+
+import { MaterialImportModule } from './material-import/material-import.module'
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,9 +21,11 @@ import { FilterComponent } from './filter/filter.component';
   ],
   imports: [
     BrowserModule,
-    AmexioWidgetModule
+    BrowserAnimationsModule,
+    MaterialImportModule,
+    HttpClientModule
   ],
-  providers: [CommonHttpService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
