@@ -26,10 +26,13 @@ export class OverviewComponent {
 
   ngOnInit() {
     this.filter = this.filterService.filter;
-    this.filterService.filters.forEach(x => {
-      x.forEach(y => {
-        console.log(y);
+    this.filter
+      .flatMap(x => {
+        return this.spendingService.getSpendings(x.search,x.fromD.toString(),x.toD.toString());
       })
-    });
+      .forEach(x => {
+        this.dataSource.data = x;
+        console.log(x);
+      });
   }
 }

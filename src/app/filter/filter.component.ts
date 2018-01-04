@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 
-import {Observable} from 'rxjs/Rx';
+import {Observable, Subject } from 'rxjs/Rx';
 import 'rxjs/add/observable/of';
+import { Scheduler } from 'rxjs/Rx';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
@@ -21,20 +22,20 @@ export class FilterComponent implements OnInit {
   fromD = new FormControl();
   toD = new FormControl();
 
+  private obs = new Subject();
+
   constructor(private filterService: FilterService) {}
 
   ngOnInit() {
     this.categories = ["All","Unterhaltung","Essen"];
 
-    this.filter = Observable.combineLatest(this.search.valueChanges,Observable.combineLatest(this.fromD.valueChanges,this.toD.valueChanges))
-      .map(x => {return {search: x[0],fromD: x[1][0], toD: x[1][0]}})
-      .debounceTime(500);
-
     this.search.setValue("");
     this.fromD.setValue(new Date());
     this.toD.setValue(new Date());
 
-    this.filterService.addFilters(this.filter);
+    this.filter = this.obs.asObservable()
+      .map(x => {return {search: this.search.value, fromD: this.fromD.value, toD: this.toD.value}});
+    this.filter.forEach(x => {this.filterService.addFilters(x)});
   }
 }
 

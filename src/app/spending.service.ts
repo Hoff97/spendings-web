@@ -4,12 +4,14 @@ import { Spending } from './spending';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { HttpClient } from '@angular/common/http';
+import { RequestOptions } from '@angular/http';
 
 @Injectable()
 export class SpendingService {
   private token: String;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   login(email: String, pw: String) {
 
@@ -22,7 +24,11 @@ export class SpendingService {
 
   getSpendings(search: String, fromD: String,
                toD: String) : Observable<Spending[]>{
-    return Observable.of([]);
+    return this.http.get<Spending[]>('localhost:9000/api/spendings',options )
+      .map(x => {
+        console.log(x);
+        return x;
+      });
   }
 
   getCategories(): Observable<String[]> {

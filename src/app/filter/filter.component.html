@@ -27,5 +27,6 @@
         <input matInput placeholder="Filter" [formControl]="search">
       </mat-form-field>
     </div>
+    <button (click)="obs.next($event)" mat-raised-button color="primary">Apply</button>
   </mat-expansion-panel>
 </mat-accordion>
