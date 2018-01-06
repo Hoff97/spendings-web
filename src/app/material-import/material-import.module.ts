@@ -13,6 +13,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatButtonModule, MatCheckboxModule, MatTabsModule,
@@ -42,7 +44,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatAutocompleteModule
   ],
   declarations: []
 })
