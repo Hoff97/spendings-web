@@ -23,18 +23,41 @@ export class OverviewComponent {
   page = 0;
   sort = "id";
 
-  displayedColumns = ['id','date','category','amount','description'];
+  displayedColumns = ['id','date','category','amount','description', 'buttons'];
   dataSource = new MatTableDataSource([]);
 
+  searchField = "";
+  from = new Date();
+  to = new Date();
+
   ngOnInit() {
+    this.from.setDate(1);
+
     this.filter = this.filterService.filter;
     this.filter
       .flatMap(x => {
+        this.searchField = x.search;
+        this.from = x.from;
+        this.to = x.to;
         return this.spendingService.getSpendings(x.search,x.from,x.to,this.page,this.sort);
       })
       .subscribe(x => {
         this.dataSource.data = x;
-        console.log(x);
       });
+  }
+
+  search() {
+    this.spendingService.getSpendings(this.searchField,this.from,this.to,this.page,this.sort)
+      .subscribe(x => {
+        this.dataSource.data = x;
+      });
+  }
+
+  edit(spend: Spending) {
+
+  }
+
+  delete(spend: Spending) {
+
   }
 }

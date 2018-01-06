@@ -16,12 +16,18 @@ import { LoginComponent } from './login/login.component';
 export class AppComponent implements AfterViewInit {
   title = 'app';
 
+  tabIndex: number;
+
   @ViewChild('addTab') addTab;
+  @ViewChild('overviewTab') overviewTab;
 
   constructor(public dialog: MatDialog){}
 
   openDialog(): void {
     let dialogRef = this.dialog.open(LoginComponent, {width: '250px'});
+    dialogRef.afterClosed().subscribe(x => {
+      this.overviewTab.search();
+    })
   }
 
   ngAfterViewInit() {
@@ -29,6 +35,10 @@ export class AppComponent implements AfterViewInit {
   }
 
   tabChange() {
-    this.addTab.loadCategories();
+    switch(this.tabIndex) {
+    case 0: this.overviewTab.search();break;
+    case 1: break;
+    case 2: this.addTab.loadCategories();break;
+    }
   }
 }

@@ -29,9 +29,7 @@ export class AddComponent implements OnInit {
   }
 
   loadCategories() {
-    console.log("Loading");
     this.spendingService.getCategories().subscribe(x => {
-      console.log(x);
       this.categories = x;
     });
   }
@@ -57,7 +55,10 @@ export class AddComponent implements OnInit {
     this.spendingService.saveCategory(this.spending.category.name)
       .subscribe(x => {
         this.spendingService.saveSpending(x.id, toSave.amount, toSave.date, toSave.description)
-          .subscribe(x => this.reset());
+          .subscribe(x => {
+            this.reset();
+            this.loadCategories();
+          });
       });
   }
 }

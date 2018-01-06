@@ -11,8 +11,8 @@ import { SpendingService } from '../spending.service';
 export class LoginComponent implements OnInit {
   hide = true;
 
-  email = "";
-  pw = "";
+  email = "a@a.a";
+  pw = "aaa";
 
   constructor(public dialogRef: MatDialogRef<LoginComponent>,
               private spendingService: SpendingService) { }

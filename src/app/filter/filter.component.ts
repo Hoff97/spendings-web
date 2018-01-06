@@ -30,7 +30,9 @@ export class FilterComponent implements OnInit {
     this.categories = ["All","Unterhaltung","Essen"];
 
     this.search.setValue("");
-    this.fromD.setValue(new Date());
+    let from = new Date();
+    from.setDate(1);
+    this.fromD.setValue(from);
     this.toD.setValue(new Date());
 
     this.filter = this.obs.asObservable()
@@ -40,7 +42,7 @@ export class FilterComponent implements OnInit {
 }
 
 export interface Filter {
-  search: String;
+  search: string;
   from: Date;
   to: Date;
 }
