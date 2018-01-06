@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Please login</h1>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Email" [(ngModel)]="email">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="pw">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="login()" color="primary">
+    Login
+  </button>
+  <button mat-button (click)="signUp()" color="info">
+    Sign up
+  </button>
+</div>

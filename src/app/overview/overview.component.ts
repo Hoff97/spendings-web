@@ -28,10 +28,10 @@ export class OverviewComponent {
     this.filter = this.filterService.filter;
     this.filter
       .flatMap(x => {
-        return this.spendingService.getSpendings(x.search,x.fromD.toString(),x.toD.toString());
+        return this.spendingService.getSpendings(x.search,x.from,x.to);
       })
-      .forEach(x => {
-        this.dataSource.data = x;
+      .subscribe(x => {
+        //this.dataSource.data = x;
         console.log(x);
       });
   }

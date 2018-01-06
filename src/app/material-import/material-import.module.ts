@@ -11,6 +11,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -24,7 +26,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatIconModule
   ],
   exports: [
     MatButtonModule, MatCheckboxModule, MatTabsModule,
@@ -36,7 +40,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatIconModule
   ],
   declarations: []
 })

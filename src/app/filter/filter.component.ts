@@ -34,13 +34,13 @@ export class FilterComponent implements OnInit {
     this.toD.setValue(new Date());
 
     this.filter = this.obs.asObservable()
-      .map(x => {return {search: this.search.value, fromD: this.fromD.value, toD: this.toD.value}});
+      .map(x => {return {search: this.search.value, from: this.fromD.value, to: this.toD.value}});
     this.filter.forEach(x => {this.filterService.addFilters(x)});
   }
 }
 
 export interface Filter {
   search: String;
-  fromD: String;
-  toD: String;
+  from: Date;
+  to: Date;
 }
