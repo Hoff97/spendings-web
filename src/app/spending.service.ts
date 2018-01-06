@@ -38,14 +38,15 @@ export class SpendingService {
   }
 
   getSpendings(search: String, from: Date,
-               to: Date, page: number, pageSize: number, sort: string) : Observable<Result<Spending[]>>{
+               to: Date, page: number, pageSize: number,
+               sort: string, sortDir: boolean) : Observable<Result<Spending[]>>{
     console.log(this.token);
     let header = new HttpHeaders();
     header = header.set('X-Auth-Token',this.token);
     header = header.set('X-Page',page + "");
     header = header.set('X-Page-Size',pageSize + "");
 
-    let url = Config.url + 'api/spending?sort=' + sort + '&sortDir=true&from='
+    let url = Config.url + 'api/spending?sort=' + sort + '&sortDir=' + sortDir + '&from='
       + moment(from).format("YYYY-MM-DD") + "&to=" + moment(to).format("YYYY-MM-DD") + "&search=" + search;
 
     return this.http.get<Spending[]>(url, { headers: header, observe: 'response' }).map( x => {

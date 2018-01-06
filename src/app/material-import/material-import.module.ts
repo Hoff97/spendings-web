@@ -14,6 +14,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatExpansionModule,
     MatDialogModule,
     MatIconModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSortModule
   ],
   exports: [
     MatButtonModule, MatCheckboxModule, MatTabsModule,
@@ -45,7 +47,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatExpansionModule,
     MatDialogModule,
     MatIconModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSortModule
   ],
   declarations: []
 })

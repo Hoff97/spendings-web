@@ -22,6 +22,7 @@ export class OverviewComponent {
   filter: Observable<Filter>;
   page = 0;
   sort = "id";
+  sortDir = true;
 
   displayedColumns = ['id','date','category','amount','description', 'buttons'];
   dataSource = new MatTableDataSource([]);
@@ -42,7 +43,7 @@ export class OverviewComponent {
         this.searchField = x.search;
         this.from = x.from;
         this.to = x.to;
-        return this.spendingService.getSpendings(x.search,x.from,x.to,this.page, this.pageSize, this.sort);
+        return this.spendingService.getSpendings(x.search,x.from,x.to,this.page, this.pageSize, this.sort, this.sortDir);
       })
       .subscribe(x => {
         this.total = x.total;
@@ -58,11 +59,18 @@ export class OverviewComponent {
   }
 
   search() {
-    this.spendingService.getSpendings(this.searchField,this.from,this.to,this.page, this.pageSize,this.sort)
+    this.spendingService.getSpendings(this.searchField,this.from,this.to,this.page, this.pageSize,this.sort, this.sortDir)
       .subscribe(x => {
         this.total = x.total;
         this.dataSource.data = x.result;
       });
+  }
+
+  sortData(ev) {
+    console.log(ev);
+    this.sort = ev.active;
+    this.sortDir = ev.direction === "asc";
+    this.search();
   }
 
   edit(spend: Spending) {
