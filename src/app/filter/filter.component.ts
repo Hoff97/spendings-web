@@ -16,6 +16,9 @@ import {FilterService} from '../filter.service';
 export class FilterComponent implements OnInit {
   categories: [String];
 
+  @Input("hasSearch")
+  hasSearch: boolean = true;
+
   filter: Observable<Filter>;
 
   search = new FormControl();

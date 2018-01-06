@@ -21,7 +21,7 @@
         <mat-datepicker #pickerTo></mat-datepicker>
       </mat-form-field>
     </div>
-    <div>
+    <div *ngIf="hasSearch">
       <label>Filter</label>
       <mat-form-field>
         <input matInput placeholder="Filter" [formControl]="search">

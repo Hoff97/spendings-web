@@ -123,7 +123,7 @@ export class SpendingService {
     let url = Config.url + 'api/spending/sum?from='
       + moment(from).format("YYYY-MM-DD") + "&to=" + moment(to).format("YYYY-MM-DD");
 
-    return this.http.get<Sum>(url, { headers: header });
+    return this.http.get<Sum[]>(url, { headers: header });
   }
 }
 
