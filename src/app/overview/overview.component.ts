@@ -7,9 +7,11 @@ import {Observable} from 'rxjs/Rx';
 
 import {Filter} from '../filter/filter.component'
 import { FilterService } from '../filter.service';
-/**
- * @title Table with filtering
- */
+
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DeleteComponent } from '../delete/delete.component';
+import { EditComponent } from '../edit/edit.component';
+
 @Component({
   selector: 'app-overview',
   styleUrls: ['overview.component.css'],
@@ -17,7 +19,8 @@ import { FilterService } from '../filter.service';
 })
 export class OverviewComponent {
   constructor(private spendingService: SpendingService,
-              private filterService: FilterService) {}
+              private filterService: FilterService,
+             public dialog: MatDialog) {}
 
   filter: Observable<Filter>;
   page = 0;
@@ -74,10 +77,24 @@ export class OverviewComponent {
   }
 
   edit(spend: Spending) {
+    let dialogRef = this.dialog.open(EditComponent, {
+      width: '250px',
+      data: spend
+    });
 
+    dialogRef.afterClosed().subscribe(x => {
+      this.search;
+    })
   }
 
   delete(spend: Spending) {
+    let dialogRef = this.dialog.open(DeleteComponent, {
+      width: '250px',
+      data: spend
+    });
 
+    dialogRef.afterClosed().subscribe(x => {
+      this.search();
+    })
   }
 }

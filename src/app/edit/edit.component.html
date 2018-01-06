@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Edit</h1>
+
+<div mat-dialog-content>
+  ID: {{ spending.id }}
+  <mat-form-field>
+    <input matInput placeholder="Category" [(ngModel)]="spending.category.name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Amount" [(ngModel)]="spending.amount">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Date" [(ngModel)]="spending.date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Description" [(ngModel)]="spending.description"></textarea>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()" color="info">
+    Cancel
+  </button>
+  <button mat-button (click)="save()" color="primary">
+    Save
+  </button>
+</div>

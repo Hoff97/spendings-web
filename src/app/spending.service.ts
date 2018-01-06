@@ -69,6 +69,22 @@ export class SpendingService {
     }, { headers: header });
   }
 
+  updateSpending(id: number, category: number, amount: number, date: Date, description: string) : Observable<Spending>{
+    let header = new HttpHeaders();
+    header = header.set('X-Auth-Token',this.token);
+
+    let url = Config.url + 'api/spending/' + id;
+
+    return this.http.put<Spending>(url, {
+      id: id,
+      categoryFk: category,
+      amount: amount,
+      date: moment(date).format("YYYY-MM-DD"),
+      description: description,
+      userFk: 0
+    }, { headers: header });
+  }
+
   saveCategory(name: string) : Observable<Category>{
     let header = new HttpHeaders();
     header = header.set('X-Auth-Token',this.token);

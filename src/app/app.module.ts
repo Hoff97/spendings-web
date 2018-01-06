@@ -16,6 +16,8 @@ import { SpendingService } from './spending.service';
 import { FilterService } from './filter.service';
 import { LoginComponent } from './login/login.component';
 import { AddComponent } from './add/add.component';
+import { EditComponent } from './edit/edit.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,14 @@ import { AddComponent } from './add/add.component';
     ConclusionComponent,
     FilterComponent,
     LoginComponent,
-    AddComponent
+    AddComponent,
+    EditComponent,
+    DeleteComponent
   ],
   entryComponents: [
-    LoginComponent
+    LoginComponent,
+    EditComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,
