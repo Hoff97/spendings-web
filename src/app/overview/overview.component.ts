@@ -83,8 +83,8 @@ export class OverviewComponent {
     });
 
     dialogRef.afterClosed().subscribe(x => {
-      this.search;
-    })
+      this.search();
+    });
   }
 
   delete(spend: Spending) {
@@ -95,6 +95,6 @@ export class OverviewComponent {
 
     dialogRef.afterClosed().subscribe(x => {
       this.search();
-    })
+    });
   }
 }

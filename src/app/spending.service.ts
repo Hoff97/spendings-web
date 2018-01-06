@@ -85,6 +85,15 @@ export class SpendingService {
     }, { headers: header });
   }
 
+  deleteSpending(id: number) : Observable<number>{
+    let header = new HttpHeaders();
+    header = header.set('X-Auth-Token',this.token);
+
+    let url = Config.url + 'api/spending/' + id;
+
+    return this.http.delete<number>(url, { headers: header });
+  }
+
   saveCategory(name: string) : Observable<Category>{
     let header = new HttpHeaders();
     header = header.set('X-Auth-Token',this.token);

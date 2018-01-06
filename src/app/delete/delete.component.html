@@ -1,6 +1,14 @@
 <h1 mat-dialog-title>Deleting</h1>
 
 <div mat-dialog-content>
+  Do you really want to delete this spending?
+  <table>
+    <tr><td>ID:</td><td>{{spending.id}}</td></tr>
+    <tr><td>Date:</td><td>{{spending.date}}</td></tr>
+    <tr><td>Category:</td><td>{{spending.category.name}}</td></tr>
+    <tr><td>Amount:</td><td>{{spending.amount}}</td></tr>
+    <tr><td>Description:</td><td>{{spending.description}}</td></tr>
+  </table>
 </div>
 
 <div mat-dialog-actions>
