@@ -17,8 +17,6 @@ import { Category } from './category';
 export class SpendingService {
   private token: string;
 
-  pageSize = 20;
-
   constructor(private http: HttpClient) { }
 
   login(email: String, pw: String) {
@@ -40,17 +38,19 @@ export class SpendingService {
   }
 
   getSpendings(search: String, from: Date,
-               to: Date, page: number, sort: string) : Observable<Spending[]>{
+               to: Date, page: number, pageSize: number, sort: string) : Observable<Result<Spending[]>>{
     console.log(this.token);
     let header = new HttpHeaders();
     header = header.set('X-Auth-Token',this.token);
     header = header.set('X-Page',page + "");
-    header = header.set('X-Page-Size',this.pageSize + "");
+    header = header.set('X-Page-Size',pageSize + "");
 
     let url = Config.url + 'api/spending?sort=' + sort + '&sortDir=true&from='
       + moment(from).format("YYYY-MM-DD") + "&to=" + moment(to).format("YYYY-MM-DD") + "&search=" + search;
 
-    return this.http.get<Spending[]>(url, { headers: header });
+    return this.http.get<Spending[]>(url, { headers: header, observe: 'response' }).map( x => {
+      return {result: x.body, total: parseInt(x.headers.get("X-Number-Items"))}
+    });
   }
 
   saveSpending(category: number, amount: number, date: Date, description: string) : Observable<Spending>{
@@ -98,4 +98,9 @@ export class SpendingService {
 
     return this.http.get<Category>(url, { headers: header });
   }
+}
+
+interface Result<A>{
+  result: A;
+  total: number;
 }

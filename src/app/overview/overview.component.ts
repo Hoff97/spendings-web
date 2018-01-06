@@ -30,6 +30,9 @@ export class OverviewComponent {
   from = new Date();
   to = new Date();
 
+  pageSize = 25;
+  total = 0;
+
   ngOnInit() {
     this.from.setDate(1);
 
@@ -39,17 +42,26 @@ export class OverviewComponent {
         this.searchField = x.search;
         this.from = x.from;
         this.to = x.to;
-        return this.spendingService.getSpendings(x.search,x.from,x.to,this.page,this.sort);
+        return this.spendingService.getSpendings(x.search,x.from,x.to,this.page, this.pageSize, this.sort);
       })
       .subscribe(x => {
-        this.dataSource.data = x;
+        this.total = x.total;
+        this.dataSource.data = x.result;
       });
   }
 
+  loadPage(ev) {
+    console.log("hi");
+    this.page = ev.pageIndex;
+    this.pageSize = ev.pageSize;
+    this.search();
+  }
+
   search() {
-    this.spendingService.getSpendings(this.searchField,this.from,this.to,this.page,this.sort)
+    this.spendingService.getSpendings(this.searchField,this.from,this.to,this.page, this.pageSize,this.sort)
       .subscribe(x => {
-        this.dataSource.data = x;
+        this.total = x.total;
+        this.dataSource.data = x.result;
       });
   }
 
