@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-form-field>
+    <input matInput placeholder="Category" [(ngModel)]="spending.category.name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Amount" [(ngModel)]="spending.amount">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Date" [(ngModel)]="spending.date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Description" [(ngModel)]="spending.description"></textarea>
+  </mat-form-field>
+
+  <button mat-button (click)="save()" color="primary">
+    Save
+  </button>
+  <button mat-button (click)="reset()">
+    Reset
+  </button>
+</div>

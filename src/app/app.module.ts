@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SpendingService } from './spending.service';
 import { FilterService } from './filter.service';
 import { LoginComponent } from './login/login.component';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoginComponent } from './login/login.component';
     OverviewComponent,
     ConclusionComponent,
     FilterComponent,
-    LoginComponent
+    LoginComponent,
+    AddComponent
   ],
   entryComponents: [
     LoginComponent

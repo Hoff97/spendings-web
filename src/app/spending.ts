@@ -1,7 +1,9 @@
+import { Category } from './category';
+
 export interface Spending {
-  id: Number;
-  date: String;
-  category: String;
-  amount: Number;
-  description: String;
+  id: number;
+  date: Date;
+  category: Category;
+  amount: number;
+  description: string;
 }

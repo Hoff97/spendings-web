@@ -16,6 +16,8 @@ import { LoginComponent } from './login/login.component';
 export class AppComponent implements AfterViewInit {
   title = 'app';
 
+  @ViewChild('addTab') addTab;
+
   constructor(public dialog: MatDialog){}
 
   openDialog(): void {
@@ -24,5 +26,9 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.openDialog();
+  }
+
+  tabChange() {
+    this.addTab.loadCategories();
   }
 }

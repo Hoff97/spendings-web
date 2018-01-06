@@ -45,7 +45,7 @@ export class SpendingService {
     let header = new HttpHeaders();
     header = header.set('X-Auth-Token',this.token);
     header = header.set('X-Page',page + "");
-    header = header.set('X-Page-Size',this.pageSize + "-");
+    header = header.set('X-Page-Size',this.pageSize + "");
 
     let url = Config.url + 'api/spending?sort=' + sort + '&sortDir=true&from='
       + moment(from).format("YYYY-MM-DD") + "&to=" + moment(to).format("YYYY-MM-DD") + "&search=" + search;
@@ -53,13 +53,40 @@ export class SpendingService {
     return this.http.get<Spending[]>(url, { headers: header });
   }
 
-  getCategories(): Observable<Category> {
+  saveSpending(category: number, amount: number, date: Date, description: string) : Observable<Spending>{
+    let header = new HttpHeaders();
+    header = header.set('X-Auth-Token',this.token);
+
+    let url = Config.url + 'api/spending';
+
+    return this.http.post<Spending>(url, {
+      categoryFk: category,
+      amount: amount,
+      date: moment(date).format("YYYY-MM-DD"),
+      description: description,
+      userFk: 0
+    }, { headers: header });
+  }
+
+  saveCategory(name: string) : Observable<Category>{
     let header = new HttpHeaders();
     header = header.set('X-Auth-Token',this.token);
 
     let url = Config.url + 'api/category';
 
-    return this.http.get<Category>(url, { headers: header });
+    return this.http.post<Category>(url, {
+      name: name,
+      parent: 0
+    }, { headers: header });
+  }
+
+  getCategories(): Observable<Category[]> {
+    let header = new HttpHeaders();
+    header = header.set('X-Auth-Token',this.token);
+
+    let url = Config.url + 'api/category';
+
+    return this.http.get<Category[]>(url, { headers: header });
   }
 
   sumSpendings(from: Date, to: Date) {

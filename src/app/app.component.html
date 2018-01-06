@@ -1,9 +1,9 @@
-<mat-tab-group>
-  <mat-tab label="Ausgaben">
+<mat-tab-group (selectedTabChange)="tabChange()">
+  <mat-tab label="List">
     <app-filter></app-filter>
     <app-overview></app-overview>
   </mat-tab>
-  <mat-tab label="Zusammenfassung">
+  <mat-tab label="Graph">
     <mat-grid-list cols="4">
       <mat-grid-tile [colspan]="1" [rowspan]="2"
         style.background="#DDD">
@@ -14,5 +14,8 @@
         <app-conclusion></app-conclusion>
       </mat-grid-tile>
     </mat-grid-list>
+  </mat-tab>
+  <mat-tab label="Add">
+    <app-add #addTab></app-add>
   </mat-tab>
 </mat-tab-group>

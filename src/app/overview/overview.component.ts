@@ -20,6 +20,8 @@ export class OverviewComponent {
               private filterService: FilterService) {}
 
   filter: Observable<Filter>;
+  page = 0;
+  sort = "id";
 
   displayedColumns = ['id','date','category','amount','description'];
   dataSource = new MatTableDataSource([]);
@@ -28,10 +30,10 @@ export class OverviewComponent {
     this.filter = this.filterService.filter;
     this.filter
       .flatMap(x => {
-        return this.spendingService.getSpendings(x.search,x.from,x.to);
+        return this.spendingService.getSpendings(x.search,x.from,x.to,this.page,this.sort);
       })
       .subscribe(x => {
-        //this.dataSource.data = x;
+        this.dataSource.data = x;
         console.log(x);
       });
   }
