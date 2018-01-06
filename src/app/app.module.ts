@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import { DeleteComponent } from './delete/delete.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DeleteComponent } from './delete/delete.component';
     MaterialImportModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule
   ],
   providers: [SpendingService,FilterService],
   bootstrap: [AppComponent]

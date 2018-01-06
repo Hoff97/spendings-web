@@ -4,16 +4,8 @@
     <app-overview #overviewTab></app-overview>
   </mat-tab>
   <mat-tab label="Graph">
-    <mat-grid-list cols="4">
-      <mat-grid-tile [colspan]="1" [rowspan]="2"
-        style.background="#DDD">
-        <app-filter></app-filter>
-      </mat-grid-tile>
-      <mat-grid-tile [colspan]="3" [rowspan]="5"
-        style.background="#DDD">
-        <app-conclusion></app-conclusion>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <app-filter></app-filter>
+    <app-conclusion #conclusionTab></app-conclusion>
   </mat-tab>
   <mat-tab label="Add">
     <app-add #addTab></app-add>

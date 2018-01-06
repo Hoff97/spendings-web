@@ -12,6 +12,7 @@ import * as moment from 'moment';
 
 import { Token } from './token';
 import { Category } from './category';
+import { Sum } from './sum';
 
 @Injectable()
 export class SpendingService {
@@ -115,14 +116,14 @@ export class SpendingService {
     return this.http.get<Category[]>(url, { headers: header });
   }
 
-  sumSpendings(from: Date, to: Date) {
+  sumSpendings(from: Date, to: Date): Observable<Sum[]> {
     let header = new HttpHeaders();
     header = header.set('X-Auth-Token',this.token);
 
     let url = Config.url + 'api/spending/sum?from='
       + moment(from).format("YYYY-MM-DD") + "&to=" + moment(to).format("YYYY-MM-DD");
 
-    return this.http.get<Category>(url, { headers: header });
+    return this.http.get<Sum>(url, { headers: header });
   }
 }
 
