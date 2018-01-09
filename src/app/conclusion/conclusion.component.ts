@@ -16,7 +16,7 @@ export class ConclusionComponent implements OnInit {
 
   sums: Sum[] = [];
 
-  view: any[] = [700, 400];
+  view: any[] = [1200, 400];
 
   // options
   showLegend = true;

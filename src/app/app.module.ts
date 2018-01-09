@@ -20,6 +20,8 @@ import { EditComponent } from './edit/edit.component';
 import { DeleteComponent } from './delete/delete.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
+import { CommonModule } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    CommonModule
   ],
   providers: [SpendingService,FilterService],
   bootstrap: [AppComponent]

@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Spending } from '../spending';
 import { Category } from '../category';
 import { SpendingService } from '../spending.service';
+import {FormControl} from '@angular/forms';
+import {startWith} from 'rxjs/operators/startWith';
+import {map} from 'rxjs/operators/map';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-add',
@@ -12,10 +16,28 @@ import { SpendingService } from '../spending.service';
 export class AddComponent implements OnInit {
   spending: Spending;
   categories: Category[];
+  filteredCategories: Observable<Category[]>;
+
+  categoryCtrl: FormControl;
 
   constructor(private spendingService: SpendingService) {
-    this.reset();
+    this.categoryCtrl = new FormControl();
     this.categories = [];
+
+    this.filteredCategories = this.categoryCtrl.valueChanges
+      .pipe(
+        startWith(''),
+        map(cat => cat ? this.filterCategories(cat) : this.categories.slice())
+      );
+
+    this.categoryCtrl.valueChanges.subscribe(x => this.spending.category.name = x);
+
+    this.reset();
+  }
+
+  filterCategories(name: string) {
+    return this.categories.filter(cat =>
+      cat.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
   ngOnInit() { }
@@ -26,6 +48,8 @@ export class AddComponent implements OnInit {
         id: 0, name: "", parent: 0
       }, description: "", date: new Date()
     }
+
+    this.categoryCtrl.setValue("");
   }
 
   loadCategories() {
