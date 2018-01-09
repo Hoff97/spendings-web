@@ -55,6 +55,7 @@ export class AddComponent implements OnInit {
   loadCategories() {
     this.spendingService.getCategories().subscribe(x => {
       this.categories = x;
+      this.categoryCtrl.setValue("");
     });
   }
 
