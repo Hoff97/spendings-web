@@ -22,7 +22,7 @@ export class ConclusionComponent implements OnInit {
   showLegend = true;
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ["#ff3f3f","#ed5938","#ce8b2d","#a8a123","#62931d","#12822c","#118264","#0c5a72","#0c1e72","#330c72","#720c6b", "#56052b", "#490009"]
   };
 
   constructor(private spendingService: SpendingService,
