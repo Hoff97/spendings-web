@@ -15,6 +15,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSortModule} from '@angular/material/sort';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatDialogModule,
     MatIconModule,
     MatAutocompleteModule,
-    MatSortModule
+    MatSortModule,
+    MatSnackBarModule
   ],
   exports: [
     MatButtonModule, MatCheckboxModule, MatTabsModule,
@@ -48,7 +50,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatDialogModule,
     MatIconModule,
     MatAutocompleteModule,
-    MatSortModule
+    MatSortModule,
+    MatSnackBarModule
   ],
   declarations: []
 })

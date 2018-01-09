@@ -8,6 +8,8 @@ import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
 import {Observable} from 'rxjs/Observable';
 
+import { MessageService } from '../message.service';
+
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -20,7 +22,8 @@ export class AddComponent implements OnInit {
 
   categoryCtrl: FormControl;
 
-  constructor(private spendingService: SpendingService) {
+  constructor(private spendingService: SpendingService,
+             private messageService: MessageService) {
     this.categoryCtrl = new FormControl();
     this.categories = [];
 
@@ -71,8 +74,13 @@ export class AddComponent implements OnInit {
       if(category.name === this.spending.category.name) {
         toSave.categoryFk = category.id;
         this.spendingService.saveSpending(toSave.categoryFk, toSave.amount, toSave.date, toSave.description)
-          .subscribe(x => this.reset());
-        this.reset();
+          .subscribe(x => {
+            this.reset();
+            this.messageService.sendMessage({ type: "success", short: "Created spending", long: ""})
+          },
+                     e => {
+                       this.messageService.sendMessage({ type: "error", short: "Creating spending failed", long: e})
+                     });
         return;
       }
     }
@@ -83,6 +91,9 @@ export class AddComponent implements OnInit {
           .subscribe(x => {
             this.reset();
             this.loadCategories();
+            this.messageService.sendMessage({ type: "success", short: "Created spending", long: ""})
+          }, e => {
+            this.messageService.sendMessage({ type: "error", short: "Creating spending failed", long: e})
           });
       });
   }

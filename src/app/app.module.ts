@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { SpendingService } from './spending.service';
 import { FilterService } from './filter.service';
+import { MessageService } from './message.service';
 import { LoginComponent } from './login/login.component';
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
@@ -21,6 +22,7 @@ import { DeleteComponent } from './delete/delete.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { CommonModule } from '@angular/common';
+import { ErrorExplainComponent } from './error-explain/error-explain.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,14 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     AddComponent,
     EditComponent,
-    DeleteComponent
+    DeleteComponent,
+    ErrorExplainComponent
   ],
   entryComponents: [
     LoginComponent,
     EditComponent,
-    DeleteComponent
+    DeleteComponent,
+    ErrorExplainComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,7 @@ import { CommonModule } from '@angular/common';
     NgxChartsModule,
     CommonModule
   ],
-  providers: [SpendingService,FilterService],
+  providers: [SpendingService,FilterService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { SpendingService } from '../spending.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   pw = "aaa";
 
   constructor(public dialogRef: MatDialogRef<LoginComponent>,
-              private spendingService: SpendingService) { }
+              private spendingService: SpendingService,
+              private messageService: MessageService) { }
 
   ngOnInit() {
   }
@@ -24,6 +26,8 @@ export class LoginComponent implements OnInit {
     this.spendingService.login(this.email,this.pw)
       .subscribe(x => {
         this.dialogRef.close();
+      }, e => {
+        this.messageService.sendMessage({type: "error", short: "Login failed", long: e});
       });
   }
 
@@ -31,6 +35,8 @@ export class LoginComponent implements OnInit {
     this.spendingService.signUp(this.email,this.pw)
       .subscribe(x => {
         this.dialogRef.close();
+      }, e => {
+        this.messageService.sendMessage({type: "error", short: "Signup failed", long: e});
       });
   }
 }
