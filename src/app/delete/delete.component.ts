@@ -4,6 +4,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { Spending } from '../spending';
 import { SpendingService } from '../spending.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-delete',
@@ -15,6 +16,7 @@ export class DeleteComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DeleteComponent>,
               private spendingService: SpendingService,
+              private messageService: MessageService,
               @Inject(MAT_DIALOG_DATA) public data: Spending) {
     this.spending = data;
   }
@@ -27,6 +29,9 @@ export class DeleteComponent implements OnInit {
     this.spendingService.deleteSpending(this.spending.id)
       .subscribe(x => {
         this.dialogRef.close();
+        this.messageService.sendMessage({ type: "success", short: "Spending deleted", long: ""})
+      }, e => {
+        this.messageService.sendMessage({ type: "error", short: "Spending could not be deleted", long: e})
       });
   }
 

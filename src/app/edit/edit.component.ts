@@ -5,6 +5,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Spending } from '../spending';
 import { Category } from '../category';
 import { SpendingService } from '../spending.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-edit',
@@ -17,6 +18,7 @@ export class EditComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<EditComponent>,
               private spendingService: SpendingService,
+              private messageService: MessageService,
               @Inject(MAT_DIALOG_DATA) public data: Spending) {
     this.spending = data;
     this.categories = [];
@@ -48,7 +50,12 @@ export class EditComponent implements OnInit {
       if(category.name === this.spending.category.name) {
         toSave.categoryFk = category.id;
         this.spendingService.updateSpending(this.spending.id,toSave.categoryFk, toSave.amount, toSave.date, toSave.description)
-          .subscribe(x => this.dialogRef.close());
+          .subscribe(x => {
+            this.dialogRef.close();
+            this.messageService.sendMessage({ type: "success", short: "Spending updated", long: ""})
+          }, e => {
+            this.messageService.sendMessage({ type: "error", short: "Spending could not be updated", long: e})
+          });
         return;
       }
     }
@@ -58,6 +65,9 @@ export class EditComponent implements OnInit {
         this.spendingService.updateSpending(this.spending.id, x.id, toSave.amount, toSave.date, toSave.description)
           .subscribe(x => {
             this.dialogRef.close();
+            this.messageService.sendMessage({ type: "success", short: "Spending updated", long: ""})
+          }, e => {
+            this.messageService.sendMessage({ type: "error", short: "Spending could not be updated", long: e})
           });
       });
   }
