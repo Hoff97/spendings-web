@@ -16,6 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSortModule} from '@angular/material/sort';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatIconModule,
     MatAutocompleteModule,
     MatSortModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule
   ],
   exports: [
     MatButtonModule, MatCheckboxModule, MatTabsModule,
@@ -51,7 +53,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatIconModule,
     MatAutocompleteModule,
     MatSortModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule
   ],
   declarations: []
 })
