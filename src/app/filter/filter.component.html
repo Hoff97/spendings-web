@@ -21,6 +21,16 @@
         <mat-datepicker #pickerTo></mat-datepicker>
       </mat-form-field>
     </div>
+    <mat-form-field *ngIf="hasSearch">
+      <mat-select placeholder="Category" [formControl]="category">
+        <mat-option [value]="{id: -1, name: '', parent: 0}">
+          --
+        </mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <div *ngIf="hasSearch">
       <label>Filter</label>
       <mat-form-field>

@@ -21,6 +21,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('addTab') addTab;
   @ViewChild('conclusionTab') conclusionTab;
   @ViewChild('overviewTab') overviewTab;
+  @ViewChild('filterTab') filterTab;
 
   constructor(public dialog: MatDialog){}
 
@@ -28,6 +29,7 @@ export class AppComponent implements AfterViewInit {
     let dialogRef = this.dialog.open(LoginComponent, {width: '250px'});
     dialogRef.afterClosed().subscribe(x => {
       this.overviewTab.search();
+      this.filterTab.load();
     })
   }
 
@@ -37,9 +39,15 @@ export class AppComponent implements AfterViewInit {
 
   tabChange() {
     switch(this.tabIndex) {
-    case 0: this.overviewTab.search();break;
+    case 0: this.overviewTab.search();this.filterTab.load();break;
     case 1: this.conclusionTab.load();break;
     case 2: this.addTab.loadCategories();break;
     }
+  }
+
+  switchOverview(ev) {
+    console.log(ev);
+    console.log("yay");
+    this.tabIndex = 0;
   }
 }

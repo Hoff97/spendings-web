@@ -33,6 +33,7 @@ export class OverviewComponent {
   searchField = "";
   from = new Date();
   to = new Date();
+  category = {id: -1, name: "", parent: 0};
 
   pageSize = 25;
   total = 0;
@@ -46,7 +47,8 @@ export class OverviewComponent {
         this.searchField = x.search;
         this.from = x.from;
         this.to = x.to;
-        return this.spendingService.getSpendings(x.search,x.from,x.to,this.page, this.pageSize, this.sort, this.sortDir);
+        this.category = x.category;
+        return this.spendingService.getSpendings(x.search,x.from,x.to,this.page, this.pageSize, this.sort, this.sortDir, this.category.id);
       })
       .subscribe(x => {
         this.total = x.total;
@@ -62,7 +64,7 @@ export class OverviewComponent {
   }
 
   search() {
-    this.spendingService.getSpendings(this.searchField,this.from,this.to,this.page, this.pageSize,this.sort, this.sortDir)
+    this.spendingService.getSpendings(this.searchField,this.from,this.to,this.page, this.pageSize,this.sort, this.sortDir,this.category.id)
       .subscribe(x => {
         this.total = x.total;
         this.dataSource.data = x.result;

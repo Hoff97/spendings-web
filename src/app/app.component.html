@@ -1,11 +1,11 @@
 <mat-tab-group (selectedTabChange)="tabChange()" [(selectedIndex)]="tabIndex">
   <mat-tab label="List">
-    <app-filter [hasSearch]="true"></app-filter>
+    <app-filter [hasSearch]="true" #filterTab></app-filter>
     <app-overview #overviewTab></app-overview>
   </mat-tab>
   <mat-tab label="Graph">
     <app-filter [hasSearch]="false"></app-filter>
-    <app-conclusion #conclusionTab></app-conclusion>
+    <app-conclusion #conclusionTab (onCategoryClick)="switchOverview($event)"></app-conclusion>
   </mat-tab>
   <mat-tab label="Add">
     <app-add #addTab></app-add>

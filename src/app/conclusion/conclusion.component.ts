@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { SpendingService } from '../spending.service';
 import { FilterService } from '../filter.service';
@@ -24,6 +24,9 @@ export class ConclusionComponent implements OnInit {
   colorScheme = {
     domain: ["#ff3f3f","#ed5938","#ce8b2d","#a8a123","#62931d","#12822c","#118264","#0c5a72","#0c1e72","#330c72","#720c6b", "#56052b", "#490009"]
   };
+
+  @Output()
+  onCategoryClick = new EventEmitter<string>();
 
   constructor(private spendingService: SpendingService,
               private filterService: FilterService) {
@@ -67,6 +70,7 @@ export class ConclusionComponent implements OnInit {
   }
 
   onSelect(event) {
-    console.log(event);
+    this.filterService.setCategory(event.name);
+    this.onCategoryClick.emit(event.name);
   }
 }
