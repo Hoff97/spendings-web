@@ -28,4 +28,12 @@
   <button mat-button (click)="reset()">
     Reset
   </button>
+
+  <input ngf type="file" accept="image/*" [(files)] = "files"/>
+  <button mat-button *ngIf="files" (click)="scanImage(files)">Scan</button>
+
+  <ngfFormData [files]="files" [(FormData)]="imageFormData" postName="image"></ngfFormData>
+
+  <ngfUploadStatus [(percent)] = "uploadPercent" [httpEvent] = "httpEvent"></ngfUploadStatus>
+  <div *ngIf="uploadPercent"> Upload Progress: {{ uploadPercent }}%</div>
 </div>

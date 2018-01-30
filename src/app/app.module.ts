@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
@@ -23,6 +23,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { CommonModule } from '@angular/common';
 import { ErrorExplainComponent } from './error-explain/error-explain.component';
+
+import { ngfModule } from "angular-file";
 
 @NgModule({
   declarations: [
@@ -50,9 +52,10 @@ import { ErrorExplainComponent } from './error-explain/error-explain.component';
     ReactiveFormsModule,
     FormsModule,
     NgxChartsModule,
-    CommonModule
+    CommonModule,
+    ngfModule
   ],
-  providers: [SpendingService,FilterService, MessageService],
+  providers: [SpendingService, FilterService, MessageService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

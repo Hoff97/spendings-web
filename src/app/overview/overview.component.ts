@@ -3,9 +3,9 @@ import { MatTableDataSource } from '@angular/material';
 
 import { Spending } from '../spending';
 import { SpendingService } from '../spending.service';
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
-import {Filter} from '../filter/filter.component'
+import { Filter } from '../filter/filter.component'
 import { FilterService } from '../filter.service';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -19,21 +19,21 @@ import { EditComponent } from '../edit/edit.component';
 })
 export class OverviewComponent {
   constructor(private spendingService: SpendingService,
-              private filterService: FilterService,
-             public dialog: MatDialog) {}
+    private filterService: FilterService,
+    public dialog: MatDialog) { }
 
   filter: Observable<Filter>;
   page = 0;
   sort = "id";
   sortDir = true;
 
-  displayedColumns = ['id','date','category','amount','description', 'buttons'];
+  displayedColumns = ['id', 'date', 'category', 'amount', 'description', 'buttons'];
   dataSource = new MatTableDataSource([]);
 
   searchField = "";
   from = new Date();
   to = new Date();
-  category = {id: -1, name: "", parent: 0};
+  category = { id: -1, name: "" };
 
   pageSize = 25;
   total = 0;
@@ -48,7 +48,7 @@ export class OverviewComponent {
         this.from = x.from;
         this.to = x.to;
         this.category = x.category;
-        return this.spendingService.getSpendings(x.search,x.from,x.to,this.page, this.pageSize, this.sort, this.sortDir, this.category.id);
+        return this.spendingService.getSpendings(x.search, x.from, x.to, this.page, this.pageSize, this.sort, this.sortDir, this.category.id);
       })
       .subscribe(x => {
         this.total = x.total;
@@ -64,7 +64,7 @@ export class OverviewComponent {
   }
 
   search() {
-    this.spendingService.getSpendings(this.searchField,this.from,this.to,this.page, this.pageSize,this.sort, this.sortDir,this.category.id)
+    this.spendingService.getSpendings(this.searchField, this.from, this.to, this.page, this.pageSize, this.sort, this.sortDir, this.category.id)
       .subscribe(x => {
         this.total = x.total;
         this.dataSource.data = x.result;

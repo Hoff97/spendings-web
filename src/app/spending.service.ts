@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Spending } from './spending';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -13,6 +13,8 @@ import * as moment from 'moment';
 import { Token } from './token';
 import { Category } from './category';
 import { Sum } from './sum';
+
+import { Option, None, Some } from 'option.ts';
 
 @Injectable()
 export class SpendingService {
@@ -39,41 +41,54 @@ export class SpendingService {
   }
 
   getSpendings(search: String, from: Date,
-               to: Date, page: number, pageSize: number,
-               sort: string, sortDir: boolean, category: number) : Observable<Result<Spending[]>>{
+    to: Date, page: number, pageSize: number,
+    sort: string, sortDir: boolean, category: number): Observable<Result<Spending[]>> {
     console.log(this.token);
     let header = new HttpHeaders();
-    header = header.set('X-Auth-Token',this.token);
-    header = header.set('X-Page',page + "");
-    header = header.set('X-Page-Size',pageSize + "");
+    header = header.set('X-Auth-Token', this.token);
+    header = header.set('X-Page', page + "");
+    header = header.set('X-Page-Size', pageSize + "");
 
     let url = Config.url + 'api/spending?sort=' + sort + '&sortDir=' + sortDir + '&from='
       + moment(from).format("YYYY-MM-DD") + "&to=" + moment(to).format("YYYY-MM-DD")
-      + "&search=" + search + (category>0 ? "&category=" + category : "");
+      + "&search=" + search + (category > 0 ? "&category=" + category : "");
 
-    return this.http.get<Spending[]>(url, { headers: header, observe: 'response' }).map( x => {
-      return {result: x.body, total: parseInt(x.headers.get("X-Number-Items"))}
+    return this.http.get<Spending[]>(url, { headers: header, observe: 'response' }).map(x => {
+      return { result: x.body, total: parseInt(x.headers.get("X-Number-Items")) }
     });
   }
 
-  saveSpending(category: number, amount: number, date: Date, description: string) : Observable<Spending>{
+  saveSpending(category: number, amount: number, date: Date, description: string, scanId: Option<number>): Observable<Spending> {
     let header = new HttpHeaders();
-    header = header.set('X-Auth-Token',this.token);
+    header = header.set('X-Auth-Token', this.token);
 
     let url = Config.url + 'api/spending';
 
-    return this.http.post<Spending>(url, {
-      categoryFk: category,
-      amount: amount,
-      date: moment(date).format("YYYY-MM-DD"),
-      description: description,
-      userFk: 0
-    }, { headers: header });
+    console.log(scanId);
+
+    if (scanId.isDefined()) {
+      return this.http.post<Spending>(url, {
+        categoryFk: category,
+        amount: amount,
+        date: moment(date).format("YYYY-MM-DD"),
+        description: description,
+        userFk: 0,
+        scanFk: scanId.get()
+      }, { headers: header });
+    } else {
+      return this.http.post<Spending>(url, {
+        categoryFk: category,
+        amount: amount,
+        date: moment(date).format("YYYY-MM-DD"),
+        description: description,
+        userFk: 0
+      }, { headers: header });
+    }
   }
 
-  updateSpending(id: number, category: number, amount: number, date: Date, description: string) : Observable<Spending>{
+  updateSpending(id: number, category: number, amount: number, date: Date, description: string): Observable<Spending> {
     let header = new HttpHeaders();
-    header = header.set('X-Auth-Token',this.token);
+    header = header.set('X-Auth-Token', this.token);
 
     let url = Config.url + 'api/spending/' + id;
 
@@ -87,18 +102,18 @@ export class SpendingService {
     }, { headers: header });
   }
 
-  deleteSpending(id: number) : Observable<number>{
+  deleteSpending(id: number): Observable<number> {
     let header = new HttpHeaders();
-    header = header.set('X-Auth-Token',this.token);
+    header = header.set('X-Auth-Token', this.token);
 
     let url = Config.url + 'api/spending/' + id;
 
     return this.http.delete<number>(url, { headers: header });
   }
 
-  saveCategory(name: string) : Observable<Category>{
+  saveCategory(name: string): Observable<Category> {
     let header = new HttpHeaders();
-    header = header.set('X-Auth-Token',this.token);
+    header = header.set('X-Auth-Token', this.token);
 
     let url = Config.url + 'api/category';
 
@@ -110,7 +125,7 @@ export class SpendingService {
 
   getCategories(): Observable<Category[]> {
     let header = new HttpHeaders();
-    header = header.set('X-Auth-Token',this.token);
+    header = header.set('X-Auth-Token', this.token);
 
     let url = Config.url + 'api/category';
 
@@ -119,7 +134,7 @@ export class SpendingService {
 
   sumSpendings(from: Date, to: Date): Observable<Sum[]> {
     let header = new HttpHeaders();
-    header = header.set('X-Auth-Token',this.token);
+    header = header.set('X-Auth-Token', this.token);
 
     let url = Config.url + 'api/spending/sum?from='
       + moment(from).format("YYYY-MM-DD") + "&to=" + moment(to).format("YYYY-MM-DD");
@@ -128,7 +143,7 @@ export class SpendingService {
   }
 }
 
-interface Result<A>{
+interface Result<A> {
   result: A;
   total: number;
 }

@@ -1,4 +1,5 @@
 import { Category } from './category';
+import { Option, None, Some } from 'option.ts';
 
 export interface Spending {
   id: number;
@@ -6,4 +7,5 @@ export interface Spending {
   category: Category;
   amount: number;
   description: string;
+  scanId: Option<number>;
 }
