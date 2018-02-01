@@ -23,7 +23,7 @@
     </div>
     <mat-form-field *ngIf="hasSearch">
       <mat-select placeholder="Category" [formControl]="category">
-        <mat-option [value]="{id: -1, name: '', parent: 0}">
+        <mat-option [value]="{id: -1, name: ''}">
           --
         </mat-option>
         <mat-option *ngFor="let category of categories" [value]="category">

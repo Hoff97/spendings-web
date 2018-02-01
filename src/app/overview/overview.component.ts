@@ -48,6 +48,8 @@ export class OverviewComponent {
         this.from = x.from;
         this.to = x.to;
         this.category = x.category;
+        if (this.category == null)
+          this.category = { id: -1, name: "" };
         return this.spendingService.getSpendings(x.search, x.from, x.to, this.page, this.pageSize, this.sort, this.sortDir, this.category.id);
       })
       .subscribe(x => {
@@ -64,6 +66,8 @@ export class OverviewComponent {
   }
 
   search() {
+    if (this.category == null)
+      this.category = { id: -1, name: "" };
     this.spendingService.getSpendings(this.searchField, this.from, this.to, this.page, this.pageSize, this.sort, this.sortDir, this.category.id)
       .subscribe(x => {
         this.total = x.total;
