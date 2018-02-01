@@ -4,7 +4,7 @@ import { Spending } from './spending';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpResponse, HttpEvent } from '@angular/common/http';
 
 import { Config } from '../config';
 
@@ -13,6 +13,12 @@ import * as moment from 'moment';
 import { Token } from './token';
 import { Category } from './category';
 import { Sum } from './sum';
+
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
+import { BrowserModule } from '@angular/platform-browser'
+import { Subscription } from 'rxjs'
+import { ScanResult } from './scanresult'
+
 
 import { Option, None, Some } from 'option.ts';
 
@@ -140,6 +146,23 @@ export class SpendingService {
       + moment(from).format("YYYY-MM-DD") + "&to=" + moment(to).format("YYYY-MM-DD");
 
     return this.http.get<Sum[]>(url, { headers: header });
+  }
+
+  scanImage(formData: FormData): Observable<ScanResult> {
+    let header = new HttpHeaders();
+    header = header.set('X-Auth-Token', this.token);
+
+    const config = new HttpRequest('POST', Config.url + 'api/image/scanSpending', formData, {
+      reportProgress: true,
+      headers: header
+    });
+
+    return this.http.request(config).flatMap(event => {
+      if (event instanceof HttpResponse) {
+        return Observable.of<ScanResult>((event as HttpResponse<ScanResult>).body);
+      }
+      return Observable.empty();
+    });
   }
 }
 

@@ -29,9 +29,7 @@ export class AddComponent implements OnInit {
   categories: Category[];
   filteredCategories: Observable<Category[]>;
 
-  postUrl = 'api/image/scanSpending';
   imageFormData: FormData;
-  httpEvent: HttpEvent<Event>;
 
   categoryCtrl: FormControl;
 
@@ -147,23 +145,11 @@ export class AddComponent implements OnInit {
     this.scanPrice = 0;
   }
 
-  scanImage(files: File[]): Subscription {
-    const config = new HttpRequest('POST', this.postUrl, this.imageFormData, {
-      reportProgress: true
+  scanImage(files: File[]) {
+    this.spendingService.scanImage(this.imageFormData).subscribe(x => {
+      this.messageService.sendMessage({ type: "success", short: "Image scanned", long: "" });
+      this.scan = x;
+      this.setScanResults();
     });
-
-    return this.httpClient.request(config)
-      .subscribe(event => {
-        //this.httpEvent = event
-
-        if (event instanceof HttpResponse) {
-          this.messageService.sendMessage({ type: "success", short: "Image scanned", long: "" });
-          this.scan = (event as HttpResponse<ScanResult>).body;
-          this.setScanResults();
-        }
-      },
-      error => {
-        //TODO
-      })
   }
 }
